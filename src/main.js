@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import App from './App'
 
+/* 引入vue-router0.7.3版本 */
+import VueRouter from 'vue-router'
+
 /* 全局引入jquery */
 import 'jquery'
 /* 引入字体图标 */
@@ -14,6 +17,24 @@ import './assets/css/metisMenu/metisMenu.css'
 import './assets/css/metisMenu/metisMenu'
 /* $(document).ready() */
 import './assets/js/all'
+
+Vue.use(VueRouter)
+var router = new VueRouter({
+  linkActiveClass: 'active'
+})
+router.map({
+  '/home': {
+    name: 'home',
+    component: function (resolve) {
+      require(['./components/Home'], resolve)
+    }
+  }
+})
+router.redirect({
+  '*': '/home'
+})
+router.start(App, '#app')
+
 /* eslint-disable no-new */
 new Vue({
   el: 'body',
