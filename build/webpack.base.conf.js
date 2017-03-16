@@ -43,7 +43,8 @@ module.exports = {
         test: /\.js$/,
         loader: 'eslint',
         include: projectRoot,
-        exclude: /node_modules/
+        /* 增加/js/为了不检查bootstrap.js */
+        exclude: [/node_modules/, /js/]
       }
     ],
     loaders: [
