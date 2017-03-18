@@ -10,8 +10,15 @@
             基础数据
           </div>
           <div class="panel-body">
+            <div class="spinner" v-show="loading">
+              <div class="rect1"></div>
+              <div class="rect2"></div>
+              <div class="rect3"></div>
+              <div class="rect4"></div>
+              <div class="rect5"></div>
+            </div>
             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
-              <thead>
+              <thead v-show ="showThead">
                 <tr>
                   <th>主键</th>
                   <th>名称</th>
@@ -45,16 +52,23 @@ export default {
   name: 'home',
   data () {
     return {
+      loading: false,
       dataList: []
     }
   },
   ready () {
     this.getUsers()
   },
+  computed: {
+    showThead: function () {
+      return !this.loading
+    }
+  },
   methods: {
     getUsers () {
+      this.loading = true
       getThingList().then((res) => {
-        console.log(res)
+        this.loading = false
         this.dataList = res.data.things
       })
     }
@@ -62,8 +76,67 @@ export default {
 }
 </script>
 <style scoped>
-  /*#dataTables tr:nth-child(4){ background-color: red; }*/
-  #dataTables tr td,tr th{
-    text-align: center;
+/*#dataTables tr:nth-child(4){ background-color: red; }*/
+#dataTables tr td,tr th{
+  text-align: center;
+}
+.panel-body {
+  min-height: 80px;
+}
+/* loading */
+.spinner {
+  position: absolute;
+  top:50px;
+  left:50%;
+  margin: 0px auto;
+  width: 50px;
+  height: 60px;
+  text-align: center;
+  font-size: 10px;
+}
+
+.spinner > div {
+  background-color: lightgreen;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+
+  -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+  animation: stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+@-webkit-keyframes stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }
+  20% { -webkit-transform: scaleY(1.0) }
+}
+
+@keyframes stretchdelay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+    }  20% {
+      transform: scaleY(1.0);
+      -webkit-transform: scaleY(1.0);
+    }
   }
-</style>
+  </style>
