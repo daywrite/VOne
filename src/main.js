@@ -18,6 +18,10 @@ import './assets/css/metisMenu/metisMenu'
 /* $(document).ready() */
 import './assets/js/all'
 
+/* mock模拟数据全局加载 */
+import Mock from './mock/index'
+Mock.bootstrap()
+
 Vue.use(VueRouter)
 var router = new VueRouter({
   linkActiveClass: 'active'
