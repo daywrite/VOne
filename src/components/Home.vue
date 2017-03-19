@@ -7,7 +7,7 @@
       <div class="col-lg-12">
         <div class="panel panel-default">
           <div class="panel-heading">
-            基础数据
+            <button type="button" class="btn btn-success" @click="onAdd()">新增</button>
           </div>
           <div class="panel-body">
             <div class="panel-shade" v-show="loading">
@@ -27,7 +27,7 @@
                     <input type="text" class="form-control" placeholder="名称" v-model="pageModel.name" v-el:text-name>
                   </div>
                   <div class="form-group">
-                    <label class="sr-only" for="count">名称</label>
+                    <label class="sr-only" for="count">数量</label>
                     <input type="text" class="form-control" v-model="pageModel.count" placeholder="数量">
                   </div>
                 </form>
@@ -39,12 +39,12 @@
               </div>
             </div>
             <br />
-            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
+            <table width="100%" class="table table-striped table-bordered table-hover dataTable" id="dataTables">
               <thead>
                 <tr>
                   <th>主键</th>
                   <th>名称</th>
-                  <th>数量</th>
+                  <th @click="btnSort" v-bind:class="[{'sorting': isSort, 'sorting_asc': isAsc, 'sorting_desc': isDesc}]">数量</th>
                   <th>日期</th>
                   <th>操作</th>
                 </tr>
@@ -79,6 +79,9 @@ export default {
   name: 'home',
   data () {
     return {
+      isSort: true,
+      isAsc: false,
+      isDesc: false,
       pageModel: {
         name: '',
         count: 0,
@@ -104,6 +107,11 @@ export default {
     onSearch: function () {
       console.log(this.pageModel.name)
       this.$refs.pagination.getData()
+    },
+    btnSort: function () {
+      this.isSort = false
+      this.isAsc = !this.isAsc
+      this.isDesc = !this.isAsc
     }
     // getUsers () {
     //   this.loading = true
