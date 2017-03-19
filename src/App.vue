@@ -12,7 +12,9 @@ import Content from './components/layout/Content'
    import jQuery from 'jquery'
    jQuery('#app').css('background-color', 'red') */
 // import $ from 'jquery'
+import store from './vuex/store'
 export default {
+  store: store,
   components: {
     Top,
     Content

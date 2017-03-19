@@ -15,7 +15,8 @@
   "dependencies": {
     "vue": "^1.0.21",
     "vue-router": "^0.7.3",
-    "babel-runtime": "^6.0.0"
+    "babel-runtime": "^6.0.0",
+    "vuex": "^1.0.1"
   },
   "devDependencies": {
     "axios": "^0.15.3",

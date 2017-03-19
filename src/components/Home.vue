@@ -48,12 +48,14 @@
 </template>
 <script>
 import { getThingList } from '../api/api'
+import { thingListsCounter } from '../vuex/actions'
 export default {
   name: 'home',
   data () {
     return {
-      loading: false,
-      dataList: []
+      loading: false
+      /* Vuex解放变量存储在每个Vue文件的return中 */
+      // dataList: []
     }
   },
   ready () {
@@ -69,8 +71,16 @@ export default {
       this.loading = true
       getThingList().then((res) => {
         this.loading = false
-        this.dataList = res.data.things
+        this.setlist(res.data.things)
       })
+    }
+  },
+  vuex: {
+    getters: {
+      dataList: state => state.thinglist
+    },
+    actions: {
+      setlist: thingListsCounter
     }
   }
 }

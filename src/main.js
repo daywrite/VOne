@@ -3,6 +3,8 @@ import App from './App'
 
 /* 引入vue-router0.7.3版本 */
 import VueRouter from 'vue-router'
+/* 引入Vuex */
+import store from './vuex/store'
 
 /* 全局引入jquery */
 import 'jquery'
@@ -41,6 +43,8 @@ router.start(App, '#app')
 
 /* eslint-disable no-new */
 new Vue({
+  /* 挂载Vuex */
+  store,
   el: 'body',
   components: { App }
 })
