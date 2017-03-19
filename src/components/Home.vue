@@ -19,6 +19,26 @@
                 <div class="rect5"></div>
               </div>
             </div>
+            <div class="row">
+              <div class="col-lg-10">
+                <form class="form-inline">
+                  <div class="form-group">
+                    <label class="sr-only" for="name">名称</label>
+                    <input type="text" class="form-control" placeholder="名称" v-model="pageModel.name" v-el:text-name>
+                  </div>
+                  <div class="form-group">
+                    <label class="sr-only" for="count">名称</label>
+                    <input type="text" class="form-control" v-model="pageModel.count" placeholder="数量">
+                  </div>
+                </form>
+              </div>
+              <div class="col-lg-2">
+                <div class="pull-right">
+                  <button type="button" class="btn btn-default" @click="onSearch()">查询</button>
+                </div>
+              </div>
+            </div>
+            <br />
             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
               <thead>
                 <tr>
@@ -44,7 +64,7 @@
             </table>
           </div>
           <div class="panel-footer">
-            <Pagination :page-model="pageModel"></Pagination>
+            <Pagination :page-model="pageModel" v-ref:pagination></Pagination>
           </div>
         </div>
       </div>
@@ -60,6 +80,8 @@ export default {
   data () {
     return {
       pageModel: {
+        name: '',
+        count: 0,
         url: '/thing/list',
         menu: [10, 20]
       }
@@ -70,6 +92,7 @@ export default {
     }
   },
   ready () {
+    this.$refs.pagination.getData()
     // this.getUsers()
   },
   computed: {
@@ -78,6 +101,10 @@ export default {
     }
   },
   methods: {
+    onSearch: function () {
+      console.log(this.pageModel.name)
+      this.$refs.pagination.getData()
+    }
     // getUsers () {
     //   this.loading = true
     //   getThingList().then((res) => {

@@ -61,7 +61,7 @@ export default {
     }
   },
   ready () {
-    this.getData()
+    // this.getData()
   },
   methods: {
     // 首页
@@ -112,6 +112,9 @@ export default {
       let _this = this
       this.param[this.pageParamName[0]] = this.cur
       this.param[this.pageParamName[1]] = this.limit
+      this.param['name'] = this.pageModel.name
+      this.param['count'] = this.pageModel.count
+      console.log(this.param)
       this.setloading(true)
       axios.get(_this.url, {params: this.param}).then((response) => {
         this.setloading(false)
