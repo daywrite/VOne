@@ -5,6 +5,8 @@ Vue.use(Vuex)
 
 /* 初始化变量 */
 const state = {
+  /* 遮罩层 */
+  loading: false,
   /* 基础数据列表 */
   thinglist: []
 }
@@ -13,6 +15,9 @@ const state = {
 const mutations = {
   GETTHINGLIST(state, amount){
     state.thinglist = amount
+  },
+  GETLOADING(state, amount){
+    state.loading = amount
   }
 }
 

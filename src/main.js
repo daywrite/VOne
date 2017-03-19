@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App'
 
+/* 引入ajax请求数据 */
+import VueResource from 'vue-resource'
 /* 引入vue-router0.7.3版本 */
 import VueRouter from 'vue-router'
 /* 引入Vuex */
@@ -25,6 +27,8 @@ import Mock from './mock/index'
 Mock.bootstrap()
 
 Vue.use(VueRouter)
+Vue.use(VueResource)
+
 var router = new VueRouter({
   linkActiveClass: 'active'
 })

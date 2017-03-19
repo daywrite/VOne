@@ -10,15 +10,17 @@
             基础数据
           </div>
           <div class="panel-body">
-            <div class="spinner" v-show="loading">
-              <div class="rect1"></div>
-              <div class="rect2"></div>
-              <div class="rect3"></div>
-              <div class="rect4"></div>
-              <div class="rect5"></div>
+            <div class="panel-shade" v-show="loading">
+              <div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+              </div>
             </div>
             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
-              <thead v-show ="showThead">
+              <thead>
                 <tr>
                   <th>主键</th>
                   <th>名称</th>
@@ -41,25 +43,34 @@
               </tbody>
             </table>
           </div>
+          <div class="panel-footer">
+            <Pagination :page-model="pageModel"></Pagination>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { getThingList } from '../api/api'
-import { thingListsCounter } from '../vuex/actions'
+// import { getThingList } from '../api/api'
+import Pagination from './common/Pagination.vue'
+import { thingListsCounter, loadingCounter } from '../vuex/actions'
 export default {
   name: 'home',
   data () {
     return {
-      loading: false
+      pageModel: {
+        url: '/thing/list',
+        menu: [10, 20]
+      }
       /* Vuex解放变量存储在每个Vue文件的return中 */
       // dataList: []
+      // loading: false,
+
     }
   },
   ready () {
-    this.getUsers()
+    // this.getUsers()
   },
   computed: {
     showThead: function () {
@@ -67,25 +78,46 @@ export default {
     }
   },
   methods: {
-    getUsers () {
-      this.loading = true
-      getThingList().then((res) => {
-        this.loading = false
-        this.setlist(res.data.things)
-      })
+    // getUsers () {
+    //   this.loading = true
+    //   getThingList().then((res) => {
+    //     this.loading = false
+    //     this.setlist(res.data.things)
+    //   })
+    // }
+  },
+  events: {
+    refresh: function (e) {
+      this.setlist(e)
     }
+  },
+  components: {
+    Pagination
   },
   vuex: {
     getters: {
-      dataList: state => state.thinglist
+      dataList: state => state.thinglist,
+      loading: state => state.loading
     },
     actions: {
-      setlist: thingListsCounter
+      setlist: thingListsCounter,
+      setloading: loadingCounter
     }
   }
 }
 </script>
 <style scoped>
+/* 遮罩层 */
+.panel-shade{
+  width:100%;
+  height:100%;
+  background-color:rgba(0,0,0,.3);
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:2;
+  /*opacity:0.3;*/
+}
 /*#dataTables tr:nth-child(4){ background-color: red; }*/
 #dataTables tr td,tr th{
   text-align: center;
@@ -96,7 +128,7 @@ export default {
 /* loading */
 .spinner {
   position: absolute;
-  top:50px;
+  top:50%;
   left:50%;
   margin: 0px auto;
   width: 50px;
@@ -106,7 +138,7 @@ export default {
 }
 
 .spinner > div {
-  background-color: lightgreen;
+  background-color:white;
   height: 100%;
   width: 6px;
   display: inline-block;
