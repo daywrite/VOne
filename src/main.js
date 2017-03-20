@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App'
 
+Vue.config.debug = true
+
 /* 引入ajax请求数据 */
 import VueResource from 'vue-resource'
 /* 引入vue-router0.7.3版本 */
@@ -38,11 +40,17 @@ router.map({
     component: function (resolve) {
       require(['./components/Home'], resolve)
     }
+  },
+  '/tbase': {
+    name: 'tbase',
+    component: function (resolve) {
+      require(['./components/Tbase'], resolve)
+    }
   }
 })
-router.redirect({
-  '*': '/home'
-})
+// router.redirect({
+//   '*': '/home'
+// })
 router.start(App, '#app')
 
 /* eslint-disable no-new */
