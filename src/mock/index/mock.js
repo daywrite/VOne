@@ -4,7 +4,7 @@ import {Thingses} from '../data/Things'
 
 export default {
   bootstrap() {
-    let mock = new MockAdapter(axios, {delayResponse: 3000})
+    let mock = new MockAdapter(axios, {delayResponse: 300})
     // mock.onGet('/thing/list').reply(200, {things: _thingses})
     mock.onGet('/thing/list').reply(config => {
       let _thingses = Thingses
