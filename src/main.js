@@ -46,6 +46,12 @@ router.map({
     component: function (resolve) {
       require(['./components/Tbase'], resolve)
     }
+  },
+  '/tplug': {
+    name: 'tplug',
+    component: function (resolve) {
+      require(['./components/Tplug'], resolve)
+    }
   }
 })
 // router.redirect({

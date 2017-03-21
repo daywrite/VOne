@@ -49,7 +49,8 @@
                       <a href="#"><i class="fa fa-table fa-fw"></i> 基础数据<span class="fa arrow"></span></a>
                       <ul class="nav nav-second-level">
                           <li><a v-link="{ path: '/home' }">首页</a></li>
-                          <li><a v-link="{ path: '/tbase' }">测试基础</a></li>                      
+                          <li><a v-link="{ path: '/tbase' }">测试基础</a></li>
+                          <li><a v-link="{ path: '/tplug' }">测试组件</a></li>                         
                       </ul>
                       <!-- /.nav-second-level -->
                   </li>

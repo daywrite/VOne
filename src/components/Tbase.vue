@@ -13,7 +13,7 @@ export default {
     // this.objOne()
     // this.objTwo()
     // this.objThree()
-    this.objFour()
+    // this.objFour()
   },
   methods: {
     /* object.assign */
